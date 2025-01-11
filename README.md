@@ -1,8 +1,10 @@
-# Cool Programs with Caution Required
+# Programs with Caution Required
 
-There are multiple packages here. Some of these are command prompt files while others are executables.
+There are multiple files in this repository. Most of these are scripts files and others are prerequisites or outputs.
 
-- System32 Wiper with Confirmation
+## Current File List: 
+
+- System32 Wiper with Confirmation (for fun, but is dangerous)
 - more to come
 
 **Any use of these programs are entirely your responsiblity. Do not install these on other people's computers without their permission. For educational purposes only!!**
