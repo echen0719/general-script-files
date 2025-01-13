@@ -5,7 +5,7 @@ There are multiple files in this repository. Most of these are scripts files and
 ## Current File List: 
 
 - System32 Wiper: for fun, but is dangerous.
-- sha256.bat: takes sha256 hash of files in a folder.
+- sha256.bat: takes sha256 hash of files.
 
 ## Check Hash: 
 
