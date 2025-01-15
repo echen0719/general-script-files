@@ -4,8 +4,9 @@ There are multiple files in this repository. Most of these are scripts files and
 
 ## Current File List: 
 
-- System32 Wiper: for fun, but is dangerous.
-- sha256.bat: takes sha256 hash of files.
+- **System32 Wiper**: for fun, but is dangerous.
+- **sha256.bat**: takes sha256 hash of files.
+- **echen0719 - archinstall.sh**: Unfinished install script
 
 ## Check Hash: 
 
