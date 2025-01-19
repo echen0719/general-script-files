@@ -25,8 +25,8 @@ sfdisk --delete $device
 root_size=
 filesystem=ext4
 
-read -p "Enter EFI Size (1G):  " efi_size
-read -p "Enter Swap Size (2G):  " swap_size
+read -p "Enter EFI Size (i.e. 1G):  " efi_size
+read -p "Enter Swap Size (i.e. 2G):  " swap_size
 
 sfdisk $device << EOF
     label: gpt
@@ -63,10 +63,12 @@ arch-chroot /mnt pacman -S networkmanager dhcpcd man-db man-pages firefox dolphi
 arch-chroot /mnt systemctl enable dhcpcd.service
 arch-chroot /mnt systemctl enable NetworkManager.service
 
+read -p "Username:  " username
+
 arch-chroot /mnt sed -i 's/# %wheel/%wheel/g' /etc/sudoers
 arch-chroot /mnt sed -i 's/%wheel ALL=(ALL) NOPASSWD: ALL/# %wheel ALL=(ALL) NOPASSWD: ALL/g' /etc/sudoers
-arch-chroot /mnt useradd -m -G wheel "echen0719"
-arch-chroot /mnt passwd "echen0719"
+arch-chroot /mnt useradd -m -G wheel "$username"
+arch-chroot /mnt passwd "$username"
 
 arch-chroot bootctl install
 
