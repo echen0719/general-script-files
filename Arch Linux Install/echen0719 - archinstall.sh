@@ -5,13 +5,6 @@
 ## base base-devel linux linux-headers linux-firmware dkms iwd archlinux-keyring sudo nano dosfstools systemd
 ## networkmanager dhcpcd man-db man-pages firefox dolphin lxde prismlauncher ark kate spectacle code obs-studio cheese vlc steam htop partitionmanager neofetch xorg-server xorg xorg-xinit xorg-xauth slim python jdk-openjdk jdk8-openjdk jdk17-openjdk cups pipewire ncdu 7zip git
 
-ip a | grep wlan
-
-read -p "Enter the WIFI SSID: " ssid
-read -p "Enter the WIFI Device:  " w_device
-read -p "Enter the WIFI Pass: " passphrase
-
-iwctl --passphrase="$passphrase" station "$w_device" connect "$ssid"
 timedatectl set-ntp true
 
 read -p "Enter the device path (i.e. /dev/nvme0n1): " device
