@@ -2,22 +2,25 @@
 
 # what do I do in my free time
 
-echo
-echo "You are currently playing Russian Roulette (my edition)."
+echo -e "\nYou are currently playing Russian Roulette (my edition)."
 echo "Every hour, your computer will spin and pull the trigger."
 echo "If your luck runs out, your /home/$USER will be deleted."
-echo "Good Luck! You will need it..."
-echo
+echo -e "Good Luck! You will need it...\n"
+
+# or else /home/$USER will be gone in a few hours
+bullet=$(( RANDOM % 50 + 1 )) # random chamber from 1 to 50 for long "play" time
+chamber=1 # start from 1
 
 russian_roulette () {
-    random=$(($RANDOM % 6 + 1)) # 1, 2, 3, 4, 5, 6
-    if [ $random -eq 6 ]; then
-        echo "💀 POW! You lost!"
+    echo -e "\n\nPulling the trigger on chamber $chamber..."
+    if [ $chamber -eq $bullet ]; then
+        echo -e "\n💀 POW! Chamber $chamber had the bullet!"
         rm -r "/home/$USER/"
         exit
     else
-        echo "😌 Click! You're safe...for now."
+        echo -e "\n😌 Click! Chamber $chamber was empty. You're safe...for now.\n"
     fi
+    chamber=$((chamber + 1))
 }
 
 while true; do # runs every 60 minutes (hour)
@@ -29,9 +32,6 @@ while true; do # runs every 60 minutes (hour)
             sleep 1
         done
     done
-
-    sleep 60m
-    echo
 
     russian_roulette
 done
