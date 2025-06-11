@@ -1,6 +1,6 @@
 #!/bin/bash
 
-debianPackages=("code" "firefox-esr" "flatpak" "htop" "libqt5core5a" "libqt5gui5" "libqt5network5" "libreoffice" "plasma-workspace-wallpapers" "plasma-discover-backend-flatpak" "vlc")
+debianPackages=("code" "firefox-esr" "flatpak" "htop" "libqt5core5a" "libqt5gui5" "libqt5network5" "libreoffice" "lxtask" "plasma-workspace-wallpapers" "plasma-discover-backend-flatpak" "vlc")
 
 pipPackages=("aiohttp" "aiohttp_socks" "beautifulsoup4" "matplotlib" "opencv-python" "pandas" "polars" "polars-lts-cpu" "pynput" "requests" "scikit-learn" "scipy" "selenium" "torch")
 
