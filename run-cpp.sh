@@ -1,10 +1,16 @@
 #!/bin/bash
 
-# remove .cpp extension
-name="${1%.cpp}"
+# remove extension
+name="${1%.*}"
+
+if [[ $1 == *.c ]]; then
+    compiler=gcc
+else
+    compiler=g++
+fi
 
 # compile and run
-g++ $1 -o $name
+$compiler $1 -o $name
 
 # if an error occurs
 if [[ $? != 0 ]]; then # $? is the error code
