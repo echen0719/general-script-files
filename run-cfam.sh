@@ -1,7 +1,8 @@
 #!/bin/bash
 
-# remove extension
-name="${1%.*}"
+# gets full path of input
+src=$(realpath "$1") # just in the case file name has spaces
+binout=${src%.*}
 
 if [[ $1 == *.c ]]; then
     compiler=gcc
@@ -10,23 +11,22 @@ else
 fi
 
 # compile and run
-$compiler $1 -o $name
+$compiler "$src" -o "$binout"
+status=$?
 
 # if an error occurs
-if [[ $? != 0 ]]; then # $? is the error code
-    echo "You either didn't specify a valid file or have an error in your code!"
+if [[ $status != 0 ]]; then # $? is the error code
+    echo -n "You either didn't specify a valid file or have an error in your code! Error code: "; echo $status
     exit
 fi
 
-./$name
+"$binout" # runs binary
 echo
 
 # auto deletion after compiling
-while true; do
-    read -p "Type 'q' to delete the compiled file or any other key to exit: " key
-    if [[ $key == "q" || $key == "Q" ]]; then
-        rm -f $name
-        exit
-    else exit
-    fi
-done
+read -p "Type 'q' to delete the compiled file or any other key to exit: " key
+if [[ $key == "q" || $key == "Q" ]]; then
+    rm -f $binout
+    exit
+else exit
+fi
