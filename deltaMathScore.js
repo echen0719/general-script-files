@@ -14,10 +14,11 @@
 
     let currentScore = Number(prompt("Current Score: "));
     let targetScore = Number(prompt("Desired Score: "));
+    let step = Number(prompt("How much to increment each time?: "));
 
     console.log("Script start");
 
-    for (let i = currentScore + 1; i <= targetScore; i++) {
+    for (let i = currentScore + step; i <= targetScore; i += step) {
         payload["score"] = i;
         payload["record"] = i;
 
