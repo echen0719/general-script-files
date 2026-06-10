@@ -6,8 +6,8 @@ function changeGold(input) {
     if (!input) return;
 
     const isAddition = input.startsWith("+") || input.startsWith("-");
-    const value = parseInt(input, 10);
-    if (isNaN(value)) return;
+    const value = Number(input)
+    if (!Number.isFinite(value)) return;
 
     let component = null;
 
