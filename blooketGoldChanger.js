@@ -89,7 +89,7 @@ function changeOtherGold(target, input) {
     let targetGold = 0;
 
     if (isAddition) {
-        const allPlayers = getAllPlayers();
+        const allPlayers = await getAllPlayers();
 
         if (!allPlayers || !allPlayers[target]) {
             console.log("No player data found.");
