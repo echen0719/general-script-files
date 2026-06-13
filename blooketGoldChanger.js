@@ -75,7 +75,7 @@ function changeGold(input) {
     });
 }
 
-function changeOtherGold(target, input) {
+async function changeOtherGold(target, input) {
     if (!input) return;
 
     const isAddition = input.startsWith("+") || input.startsWith("-");
