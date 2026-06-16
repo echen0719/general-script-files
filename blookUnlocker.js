@@ -8,6 +8,11 @@ function getComponent() {
         let fiber = element[fiberKey];
         while (fiber) {
             const instance = fiber.stateNode;
+            if (instance && instance.props?.liveGameController && instance.props?.client?.name) {
+                component = instance;
+                break;
+            }
+            
             if (instance && instance.state?.unlocks !== undefined) {
                 component = instance;
                 break;
@@ -21,7 +26,7 @@ function getComponent() {
         return component;
     }
 
-    console.log("Could not find component. Be on the game start screen.")
+    console.log("Could not find component. Be on the game start screen or question screen.")
     return
 }
 
@@ -155,6 +160,14 @@ function createUI() {
         updateDropdown(e.target.value);
     });
 
+    searchInput.addEventListener("keydown", (e) => {
+        updateDropdown(e.target.value);
+
+        if (e.key === "Enter") {
+            submitButton.click();
+        }
+    });
+
     updateDropdown("");
 
     const submitButton = document.createElement("button");
@@ -175,6 +188,8 @@ function createUI() {
     submitButton.addEventListener("click", () => {
         if (dropdown.value) {
             unlockBlook(dropdown.value);
+            searchInput.value = "";
+            updateDropdown("");
         }
     });
 
