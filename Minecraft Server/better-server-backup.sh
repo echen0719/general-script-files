@@ -1,18 +1,19 @@
 #!/bin/bash
 
 backupDir="backups"
-worldDir="world"
+worldDir="world" # world and logs exists on all, can be changed
 logsDir="logs" # just in case
 
 maxSize=$((3 * 1024 * 1024 * 1024)) # 3GB
 interval=3600 # 1 hour
+previousHash="" # for comparison
 
 mkdir -p "$backupDir"
 
 checkFolderSize() {
     local size
 
-    size=$(du -s --block-size 1 "$backupDir" | awk '{print $1}')
+    size=$(du -sb --block-size 1 "$backupDir" | awk '{print $1}')
 
     if [ "$size" -gt "$maxSize" ]; then
         echo "$(date "+%m/%d/%Y at %H:%M:%S:") Backups are over 3 GB. Cleaning old backups..."
@@ -32,13 +33,28 @@ checkFolderSize() {
     fi
 }
 
+# https://stackoverflow.com/questions/545387
+folderSHA1() { # hashes the two folders
+    find "$worldDir" "$logsDir" -type f -print0 | sort -z | xargs -0 sha1sum | sha1sum | awk '{print $1}'
+}
+
 makeBackup() {
+    local currentHash
     timestamp=$(date "+%m-%d-%Y-%H-%M")
+
+    echo "$(date "+%m/%d/%Y at %H:%M:%S:") Checking for changes..."
+    currentHash=$(folderSHA1)
+
+    if [ "$currentHash" = "$previousHash" ]; then
+        echo "$(date "+%m/%d/%Y at %H:%M:%S:") No changes detected. Skipping backup..."
+        return
+    fi
 
     echo "$(date "+%m/%d/%Y at %H:%M:%S:") Starting backup..."
 
     if tar -cJf "$backupDir/save-$timestamp.tar.xz" "$worldDir" "$logsDir"; then
         echo "$(date "+%m/%d/%Y at %H:%M:%S:") Backup completed successfully..."
+        previousHash="$currentHash"
     else
         echo "$(date "+%m/%d/%Y at %H:%M:%S:") Backup failed...IDK what happened..."
         rm -f "$backupDir/save-$timestamp.tar.xz"
