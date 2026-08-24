@@ -3,6 +3,7 @@
 backupDir="backups"
 worldDir="world" # world and logs exists on all, can be changed
 logsDir="logs" # just in case
+tmuxSession="shared"
 
 maxSize=$((3 * 1024 * 1024 * 1024)) # 3GB
 interval=3600 # 1 hour
@@ -51,6 +52,9 @@ makeBackup() {
     fi
 
     echo "$(date "+%m/%d/%Y at %H:%M:%S:") Starting backup..."
+    tmux send-keys -t "$tmuxSession" "save-all" C-m
+
+    sleep 10
 
     if tar -cJf "$backupDir/save-$timestamp.tar.xz" "$worldDir" "$logsDir"; then
         echo "$(date "+%m/%d/%Y at %H:%M:%S:") Backup completed successfully..."
