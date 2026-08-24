@@ -34,17 +34,16 @@ checkFolderSize() {
     fi
 }
 
-# https://stackoverflow.com/questions/545387
-folderSHA1() { # hashes the two folders
-    find "$worldDir" "$logsDir" -type f -print0 | sort -z | xargs -0 sha1sum | sha1sum | awk '{print $1}'
-}
-
 makeBackup() {
     local currentHash
     timestamp=$(date "+%m-%d-%Y-%H-%M")
 
+    tmux send-keys -t "$tmuxSession" "save-all" C-m
+    sleep 15
+
     echo "$(date "+%m/%d/%Y at %H:%M:%S:") Checking for changes..."
-    currentHash=$(folderSHA1)
+    currentHash=$(find "$worldDir" -type f -print0 | sort -z | xargs -0 sha1sum | sha1sum | awk '{print $1}')
+    # https://stackoverflow.com/questions/545387
 
     if [ "$currentHash" = "$previousHash" ]; then
         echo "$(date "+%m/%d/%Y at %H:%M:%S:") No changes detected. Skipping backup..."
@@ -52,9 +51,6 @@ makeBackup() {
     fi
 
     echo "$(date "+%m/%d/%Y at %H:%M:%S:") Starting backup..."
-    tmux send-keys -t "$tmuxSession" "save-all" C-m
-
-    sleep 10
 
     if tar -cJf "$backupDir/save-$timestamp.tar.xz" "$worldDir" "$logsDir"; then
         echo "$(date "+%m/%d/%Y at %H:%M:%S:") Backup completed successfully..."
