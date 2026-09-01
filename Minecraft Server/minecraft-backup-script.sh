@@ -3,7 +3,7 @@
 backupDir="backups"
 worldDir="world" # world and logs exists on all, can be changed
 logsDir="logs" # just in case
-tmuxSession="shared"
+# tmuxSession="shared"
 
 maxSize=$((3 * 1024 * 1024 * 1024)) # 3GB
 interval=3600 # 1 hour
@@ -38,8 +38,8 @@ makeBackup() {
     local currentHash
     timestamp=$(date "+%m-%d-%Y-%H-%M")
 
-    tmux send-keys -t "$tmuxSession" "save-all" C-m
-    sleep 15
+    # tmux send-keys -t "$tmuxSession" "save-all" C-m
+    # sleep 15
 
     echo "$(date "+%m/%d/%Y at %H:%M:%S:") Checking for changes..."
     currentHash=$(find "$worldDir" -type f -print0 | sort -z | xargs -0 sha1sum | sha1sum | awk '{print $1}')
