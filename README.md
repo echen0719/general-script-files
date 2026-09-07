@@ -45,6 +45,18 @@ Some useful files that may help with certain tasks. Each one has a different gen
 ./compile-run-cx.sh program.c # example
 ./compile-run-cx.sh program.cpp # example
 ```
+- `rotate-tty-display.sh` — Rotates the tty in the common (0, 90, 180, 270) angles.
+```bash
+./rotate-screen.sh 0 # landscape
+./rotate-screen.sh 1 # portrait right
+./rotate-screen.sh 2 # landscape inverted
+./rotate-screen.sh 3 # portrait left
+```
+- `tmux-systemd-shared.sh` — Creates a shared tmux session for multi-computer access
+```bash
+./tmux-systemd-shared.sh # for current user that ran the script
+./tmux-systemd-shared.sh echen0719 # for a specific user
+```
 
 #### Misc
 
