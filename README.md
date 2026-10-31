@@ -39,18 +39,23 @@ Some useful files that may help with certain tasks. Each one has a different gen
 ```bash
 ./backup-root.sh -f /backup/root.tar.zst -l 19 # example
 ```
-- `flush-swap.sh` — Disables and the enables the swap file.
 - `compile-run-cx.sh` — Compiles and runs C/C++ source files, with optional deletion of compiled binary after execution
 ```bash
 ./compile-run-cx.sh program.c # example
 ./compile-run-cx.sh program.cpp # example
 ```
+- `flush-swap.sh` — Disables and the enables the swap file.
+- `resize-wayland-windows.sh` — Wayland script using QDBus6 to resize windows Use ```--help``` for more information
+```bash
+./resize-wayland-windows.sh # interactive usage
+./resize-wayland-windows.sh -t minecraft -w 1600 -h 900 # with flags
+```
 - `rotate-tty-display.sh` — Rotates the tty in the common (0, 90, 180, 270) angles.
 ```bash
-./rotate-screen.sh 0 # landscape
-./rotate-screen.sh 1 # portrait right
-./rotate-screen.sh 2 # landscape inverted
-./rotate-screen.sh 3 # portrait left
+./rotate-tty-display.sh 0 # landscape
+./rotate-tty-display.sh 1 # portrait right
+./rotate-tty-display.sh 2 # landscape inverted
+./rotate-tty-display.sh 3 # portrait left
 ```
 - `tmux-systemd-shared.sh` — Creates a shared tmux session for multi-computer access
 ```bash
